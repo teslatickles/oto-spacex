@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -20,10 +20,11 @@ class SettingsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  settingsParameterCard(Icons.cached, 'About'),
+                  settingsParameterCard(FontAwesomeIcons.audible, 'About'),
                   settingsParameterCard(Icons.archive, 'Download Data'),
                   settingsParameterCard(Icons.visibility, 'Theme'),
-                  settingsParameterCard(Icons.art_track, 'Github page'),
+                  settingsParameterCard(
+                      FontAwesomeIcons.githubAlt, 'Github page'),
                   settingsParameterCard(Icons.add_location, 'Location'),
                   settingsParameterCard(Icons.add_location, 'Location'),
                 ],

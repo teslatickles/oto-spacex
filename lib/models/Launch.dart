@@ -3,7 +3,7 @@ class Launch {
   Object fairings;
   Object links;
   String staticFireDateUtc;
-  double staticFireDateUnix;
+  int staticFireDateUnix;
   bool tbd;
   bool net;
   int window;
@@ -59,8 +59,8 @@ class Launch {
       : id = launchJson['id'],
         fairings = launchJson['fairings'],
         links = launchJson['links'],
-        staticFireDateUtc = launchJson['staticFireDateUtc'],
-        staticFireDateUnix = launchJson['staticFireDateUnix'],
+        staticFireDateUtc = launchJson['static_fire_date_utc'],
+        staticFireDateUnix = launchJson['static_fire_date_unix'],
         tbd = launchJson['tbd'],
         net = launchJson['net'],
         window = launchJson['window'],

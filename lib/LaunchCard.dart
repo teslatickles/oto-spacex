@@ -83,38 +83,38 @@ class _LaunchCardState extends State<LaunchCard> {
       ),
       child: Column(
         children: <Widget>[
-          //   id != null
-          //       ? Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: Row(
-          //             children: <Widget>[
-          //               Icon(
-          //                 Icons.code,
-          //                 color: Color.fromRGBO(120, 30, 89, 3),
-          //               ),
-          //               Text(
-          //                 'ID: $id',
-          //                 style:
-          //                     TextStyle(textBaseline: TextBaseline.ideographic),
-          //               ),
-          //             ],
-          //           ),
-          //         )
-          //       : Container(),
-          //   rocket != null
-          //       ? Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: Row(
-          //             children: <Widget>[
-          //               Icon(
-          //                 Icons.flight_takeoff,
-          //                 color: Color.fromRGBO(120, 30, 89, 3),
-          //               ),
-          //               Text('Rocket: $rocket'),
-          //             ],
-          //           ),
-          //         )
-          //       : Container(),
+          id != null
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.code,
+                        color: Color.fromRGBO(120, 30, 89, 3),
+                      ),
+                      Text(
+                        'ID: $id',
+                        style:
+                            TextStyle(textBaseline: TextBaseline.ideographic),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
+          rocket != null
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.flight_takeoff,
+                        color: Color.fromRGBO(120, 30, 89, 3),
+                      ),
+                      Text('Rocket: $rocket'),
+                    ],
+                  ),
+                )
+              : Container(),
           //   success != null
           //       ? Padding(
           //           padding: const EdgeInsets.all(8.0),

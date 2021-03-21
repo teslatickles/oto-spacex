@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:oto/ApiBaseHelper.dart';
-import 'models/Launch.dart';
+import 'package:oto/Helpers/ApiBaseHelper.dart';
+import 'package:oto/models/Launch.dart';
 
 class LaunchRepository {
   ApiBaseHelper _helper = ApiBaseHelper();

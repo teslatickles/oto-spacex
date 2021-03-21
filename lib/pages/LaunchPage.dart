@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oto/models/Launch.dart';
-import 'package:oto/LaunchRepository.dart';
-import 'package:oto/LaunchCard.dart';
+import 'package:oto/repositories/LaunchRepository.dart';
+import 'package:oto/Helpers/LaunchCard.dart';
 
 class LaunchPage extends StatefulWidget {
   LaunchPage({

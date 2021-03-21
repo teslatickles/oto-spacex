@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class NexusPage extends StatefulWidget {
-  NexusPage({Key key, this.title}) : super(key: key);
+  NexusPage({key, this.title}) : super(key: key);
 
   final String title;
 
@@ -35,26 +35,33 @@ class _NexusPageState extends State<NexusPage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 2),
+      padding: EdgeInsets.only(bottom: 2.0),
       child: Text(
         'Home Base',
         style: styleOptions,
       ),
     ),
     Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 2),
+      padding: EdgeInsets.only(bottom: 2.0),
       child: Text(
         'Launches',
         style: styleOptions,
       ),
     ),
     Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 2),
+      padding: EdgeInsets.only(bottom: 2.0),
       child: Text(
         'Options',
         style: styleOptions,
       ),
     ),
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: Text(
+        'playground',
+        style: styleOptions,
+      ),
+    )
   ];
 
   @override
@@ -64,7 +71,7 @@ class _NexusPageState extends State<NexusPage> {
         title: Text(widget.title),
       ),
       body: _handlePaging(_index),
-      backgroundColor: Colors.black87,
+      backgroundColor: Color.fromRGBO(0, 175, 180, 200),
       bottomNavigationBar: _bottomBar(),
     );
   }
@@ -100,12 +107,17 @@ class _NexusPageState extends State<NexusPage> {
         selectedWidget = mainPage();
         return selectedWidget;
       case 1:
-        selectedWidget = LaunchPage();
+        selectedWidget = LaunchPage(
+          key: null,
+        );
         return selectedWidget;
       case 2:
-        selectedWidget = settingsPage();
+        selectedWidget = SettingsPage();
         return selectedWidget;
       default:
+        selectedWidget = NexusPage(
+          title: 'SpaceX Nexus',
+        );
         return selectedWidget;
     }
   }

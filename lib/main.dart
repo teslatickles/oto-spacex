@@ -7,27 +7,27 @@ import 'package:oto/pages/SettingsPage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  dynamic hex = 0xFF4b6584;
+  final dynamic hex = 0xFF222f3e;
   final MaterialColor kPrimaryColor = const MaterialColor(
-    0xFF4b6584,
+    0xFF222f3e,
     const <int, Color>{
-      50: const Color(0xFF4b6584),
-      100: const Color(0xFF4b6584),
-      200: const Color(0xFF4b6584),
-      300: const Color(0xFF4b6584),
-      400: const Color(0xFF4b6584),
-      500: const Color(0xFF4b6584),
-      600: const Color(0xFF4b6584),
-      700: const Color(0xFF4b6584),
-      800: const Color(0xFF4b6584),
-      900: const Color(0xFF4b6584),
+      50: const Color(0xFF222f3e),
+      100: const Color(0xFF222f3e),
+      200: const Color(0xFF222f3e),
+      300: const Color(0xFF222f3e),
+      400: const Color(0xFF222f3e),
+      500: const Color(0xFF222f3e),
+      600: const Color(0xFF222f3e),
+      700: const Color(0xFF222f3e),
+      800: const Color(0xFF222f3e),
+      900: const Color(0xFF222f3e),
     },
   );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SpaceX Nexus',
-      // color: Color.fromRGBO(75, 101, 130, 80),
       theme: ThemeData(primarySwatch: kPrimaryColor),
       home: NexusPage(title: 'SpaceX Nexus'),
     );
@@ -47,18 +47,18 @@ class _NexusPageState extends State<NexusPage> {
   int _index = 0;
 
   final MaterialColor kPrimaryColor = const MaterialColor(
-    0xFF4b6584,
+    0xFF222f3e,
     const <int, Color>{
-      50: const Color(0xFF4b6584),
-      100: const Color(0xFF4b6584),
-      200: const Color(0xFF4b6584),
-      300: const Color(0xFF4b6584),
-      400: const Color(0xFF4b6584),
-      500: const Color(0xFF4b6584),
-      600: const Color(0xFF4b6584),
-      700: const Color(0xFF4b6584),
-      800: const Color(0xFF4b6584),
-      900: const Color(0xFF4b6584),
+      50: const Color(0xFF222f3e),
+      100: const Color(0xFF222f3e),
+      200: const Color(0xFF222f3e),
+      300: const Color(0xFF222f3e),
+      400: const Color(0xFF222f3e),
+      500: const Color(0xFF222f3e),
+      600: const Color(0xFF222f3e),
+      700: const Color(0xFF222f3e),
+      800: const Color(0xFF222f3e),
+      900: const Color(0xFF222f3e),
     },
   );
 
@@ -132,25 +132,19 @@ class _NexusPageState extends State<NexusPage> {
   }
 
   Widget _handlePaging(int index) {
-    Widget selectedWidget;
-
     switch (index) {
       case 0:
-        selectedWidget = mainPage();
-        return selectedWidget;
+        return mainPage();
       case 1:
-        selectedWidget = LaunchPage(
+        return LaunchPage(
           key: null,
         );
-        return selectedWidget;
       case 2:
-        selectedWidget = SettingsPage();
-        return selectedWidget;
+        return SettingsPage();
       default:
-        selectedWidget = NexusPage(
+        return NexusPage(
           title: 'SpaceX Nexus',
         );
-        return selectedWidget;
     }
   }
 }

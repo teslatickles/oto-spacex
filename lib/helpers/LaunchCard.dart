@@ -1,8 +1,8 @@
-import 'dart:convert';
+import "package:flutter/material.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "../models/Launch.dart";
 
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:oto/models/Launch.dart';
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class LaunchCard extends StatefulWidget {
   final dynamic item;
@@ -12,18 +12,53 @@ class LaunchCard extends StatefulWidget {
   _LaunchCardState createState() => _LaunchCardState();
 }
 
-class _LaunchCardState extends State<LaunchCard> {
+class _LaunchCardState extends State<LaunchCard> with RouteAware {
   String itemAsString;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  updateLaunchCount() {
+    print("updateLaunchCount called!");
+  }
+
+  Widget launchCountDisplay(Launch launch) {
+    print("display launch count called!");
+    // print(launch.toJson().length);
+    return Container(
+      child: Text("count goes here!!!"),
+    );
+  }
+
+  @override
+  void didPush() {
+    // Route was pushed onto navigator and is now topmost route.
+  }
+
+  @override
+  void didPopNext() {
+    // Covering route was popped off the navigator.
+    print("Is this one working");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 180.0,
-      margin: EdgeInsets.symmetric(vertical: 16.0, horizontal: 18.0),
+      height: 200.0,
+      margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       child: Stack(
         children: <Widget>[
           launchContent(widget.item),
-          launchThumbnail(),
+          // launchThumbnail(),
         ],
       ),
     );
@@ -31,15 +66,15 @@ class _LaunchCardState extends State<LaunchCard> {
 
   Widget launchThumbnail() {
     return Container(
-      height: 118.0,
-      margin: EdgeInsets.symmetric(vertical: 30.0),
+      height: 65.0,
+      margin: EdgeInsets.symmetric(vertical: 50.0),
       alignment: FractionalOffset.centerLeft,
       child: Image.asset("lib/images/spacef9.png"),
     );
   }
 
   Widget launchContent(dynamic item) {
-    itemAsString = json.encode(item);
+    // itemAsString = json.encode(item);
 
     dynamic rocketNames = {
       "5e9d0d95eda69955f709d1eb": "Falcon 1",
@@ -49,50 +84,71 @@ class _LaunchCardState extends State<LaunchCard> {
     };
 
     Launch launch = item as Launch;
-    String id = launch.id;
-    Object fairings = launch.fairings.toString();
-    bool autoUpdate = launch.autoUpdate;
-    String rocket = launch.rocket;
-    bool success = launch.success;
-    String details = launch.details;
-    List<dynamic> capsules = launch.capsules;
-    List<dynamic> cores = launch.cores.toList();
-    List<dynamic> crew = launch.crew.toList();
-    int flightNumber = launch.flightNumber;
-    String localDate = launch.dateLocal;
-    String preciseDate = launch.datePrecision.toString();
-    String utcDate = launch.dateUtc;
-    int staticFireDateUnix = launch.staticFireDateUnix;
-    String staticFireDateUtc = launch.staticFireDateUtc;
-    String launchpad = launch.launchpad;
-    String launchLibraryId = launch.launchLibraryId;
-    Object links = launch.links.toString();
-    String name = launch.name;
-    bool net = launch.net;
-    List<dynamic> payloads = launch.payloads.toList();
-    List<dynamic> ships = launch.ships.toList();
-    bool tbd = launch.tbd;
-    bool upcoming = launch.upcoming;
-    int window = launch.window;
+
+    Widget dataIconCombo(dynamic icon, String data) {
+      return data == null
+          ? Container()
+          : Padding(
+              padding: const EdgeInsets.fromLTRB(2.0, 8.0, 0.0, 8.0),
+              child: Row(
+                children: <Widget>[
+                  icon != null
+                      ? Icon(
+                          icon,
+                          color: Color.fromRGBO(74, 105, 189, 5),
+                          size: 20.0,
+                        )
+                      : Container(),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15.0, 5.5, 0.90, 0.0),
+                    child: Text(
+                      data,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: data == launch.name
+                              ? Color.fromRGBO(225, 225, 225, 1)
+                              : Color.fromRGBO(229, 80, 57, 1),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0),
+                    ),
+                  )
+                ],
+              ),
+            );
+    }
+
+    String convertRocketGuidToName(String rocketGuid) {
+      return rocketNames[launch.rocket];
+    }
 
     Widget cardContent(Column column) {
       return Container(
-        margin: EdgeInsets.fromLTRB(75.0, 16.0, 16.0, 0.0),
+        margin: EdgeInsets.fromLTRB(15.0, 18.0, 0.0, 0.0),
         constraints: BoxConstraints.expand(),
         child: column,
       );
     }
 
+    Widget lineBreak() {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 6.0),
+        height: 2.4,
+        width: 90.0,
+        padding: EdgeInsets.fromLTRB(0.0, 0.0, 12.0, 0.0),
+        color: Color.fromRGBO(226, 173, 169, 100.0),
+      );
+    }
+
     return Container(
-        height: 175.0,
-        margin: EdgeInsets.only(left: 46.0),
+        height: 250.0,
+        margin: EdgeInsets.fromLTRB(7.0, 0.0, 0.0, 0.0),
         decoration: BoxDecoration(
-          color: Color.fromRGBO(230, 211, 169, 45.0),
+          color: Color.fromRGBO(125, 178, 69, 255),
           shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(15.0),
           boxShadow: <BoxShadow>[
             BoxShadow(
-                color: Colors.black54,
+                color: Colors.black12,
                 blurRadius: 20.0,
                 offset: Offset(0.0, 20.0)),
           ],
@@ -100,118 +156,50 @@ class _LaunchCardState extends State<LaunchCard> {
         child: cardContent(
           Column(
             children: <Widget>[
-              name != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            FontAwesomeIcons.hatCowboySide,
-                            color: Color.fromRGBO(183, 61, 24, 5),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              name,
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color.fromRGBO(127, 80, 57, 10),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 2.0),
-                height: 3.0,
-                width: 100.0,
-                color: Color.fromRGBO(56, 173, 169, 50.0),
-              ),
-              rocket != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            FontAwesomeIcons.rocket,
-                            color: Color.fromRGBO(74, 105, 189, 5),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              rocketNames[rocket],
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color.fromRGBO(229, 80, 57, 1),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  : Container(),
-              staticFireDateUtc != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            FontAwesomeIcons.calendarAlt,
-                            color: Color.fromRGBO(74, 105, 189, 5),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              formatDate(staticFireDateUtc),
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color.fromRGBO(229, 80, 57, 1),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
-              success != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            FontAwesomeIcons.handPeace,
-                            color: Color.fromRGBO(74, 105, 189, 5),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              '${success ? 'Successful' : 'Failure'}',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color.fromRGBO(229, 80, 57, 1),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(),
+              dataIconCombo(null, launch.name),
+              lineBreak(),
+              dataIconCombo(FontAwesomeIcons.rocket,
+                  convertRocketGuidToName(launch.rocket)),
+              dataIconCombo(
+                  FontAwesomeIcons.calendarAlt,
+                  launch.staticFireDateUtc != null
+                      ? formatDate(launch.staticFireDateUtc)
+                      : launch.staticFireDateUtc),
+              dataIconCombo(FontAwesomeIcons.handPeace,
+                  launch.success ? "Success" : "Failure"),
             ],
           ),
         ));
   }
 
   formatDate(String datetime) {
-    var formattedDate = datetime.substring(0, 10);
-
-    return formattedDate;
+    return datetime.substring(0, 10);
   }
 }
 
-// var contentColumn =
+// Widget cardEntry(dynamic property) {
+//   return property != null
+//       ? Padding(
+//           padding: const EdgeInsets.all(1.0),
+//           child: Row(
+//             children: <Widget>[
+//               Icon(
+//                 FontAwesomeIcons.hatCowboySide,
+//                 color: Color.fromRGBO(183, 61, 24, 5),
+//               ),
+//               Padding(
+//                 padding: EdgeInsets.only(left: 18.0),
+//                 child: Text(
+//                   property,
+//                   textAlign: TextAlign.right,
+//                   style: TextStyle(
+//                     color: Color.fromRGBO(127, 80, 57, 10),
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               )
+//             ],
+//           ),
+//         )
+//       : Padding(padding: const EdgeInsets.all(1.0));
+// }
